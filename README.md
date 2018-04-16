@@ -50,13 +50,14 @@ Over the weekend:
 
 Day 1:
 - [ ] Set up the canvas as well as the static assets(row of static arrows that will catch the moving arrows) via the `tapTapRev.js` file
-- [ ] Begin to set up the dynamic elements and the logic of registering the arrows with the right input.
+- [ ] Finish rendering the dynamic arrows and begin to set up the logic of registering the arrows with the right input.
 
 Day 2:
-- [ ] Continue implementation of the dynamic elements of the game logic.
+- [ ] Finish the collision detection between dynamic and static arrows.
 - [ ] Figure out and render the animated aspect of the arrows, moving and dynamic.
 
 Day 3:
+- [ ] Finish styling.
 - [ ] Figure out and implement the music aspect of the app.
 - [ ] Build the points system of the game.
 
