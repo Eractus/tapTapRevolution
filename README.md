@@ -16,7 +16,7 @@ In TTR, players will be able to:
 - [ ] Have a completely interactive experience with the game's single, dynamic screen.
 - [ ] Adjust the speed of the game.
 - [ ] Keep track of their score.
-- [ ] Mute on/of, start, pause, and reset the game.
+- [ ] Mute on/of, start and pause the game.
 - [ ] Access a straightforward tutorial on how to play
 
 ### Wireframes
