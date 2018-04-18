@@ -3,7 +3,8 @@ class Arrow {
     this.direction = direction;
     this.width = 75;
     this.height = 75;
-    this.start = 650;
+    this.y = 650;
+    this.dy = 0;
     this.drawArrow = this.drawArrow.bind(this);
     this.arrowParams(direction);
   }
@@ -38,13 +39,13 @@ class Arrow {
   }
 
   drawArrow() {
-    this.directionImage.addEventListener("load", (e) => animate());
-
+    // this.directionImage.addEventListener("load", (e) => animate());
     let numFrames = 0;
-
+    console.dir(`initial call: ${this.direction}`);
     const animate = () => {
+      // console.dir(`start animate: ${this.direction}`);
       numFrames ++;
-      ctx.clearRect(0, 0, this.width, this.height);
+      // ctx.clearRect(0, 0, this.width, this.height);
       ctx.drawImage(
         this.directionImage,
         this.shift,
@@ -52,18 +53,22 @@ class Arrow {
         this.width,
         this.height,
         this.x,
-        this.start,
+        this.y,
         this.width,
         this.height
       );
-
+      // console.dir(`after draw: ${this.direction}`);
+      this.y += this.dy;
+      // console.dir(`after this.y: ${this.direction}`);
       if (numFrames === 15) {
         this.shift += this.width;
         numFrames = 0;
         this.shift = this.shift === 1200 ? 0 : this.shift;
       }
-
+      // console.dir(`before requestAnimationFrame: ${this.direction}`);
       requestAnimationFrame(animate);
+      // setTimeout(animate, 33);
     };
+    animate();
   }
 }

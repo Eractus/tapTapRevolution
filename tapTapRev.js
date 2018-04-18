@@ -6,7 +6,7 @@ let downArrow = 2.75*(canvas.width/8);
 let upArrow = 4.0*(canvas.width/8);
 let rightArrow = 5.25*(canvas.width/8);
 let yStatic = 10;
-let dy = -1;
+let y = canvas.height;
 let leftPressed = false;
 let downPressed = false;
 let upPressed = false;
@@ -38,32 +38,55 @@ for (let i=0; arrowArray.length < 40; i++) {
   arrowArray.push(arrowCreate());
 }
 
+let arrowSend = 0;
+
 function arrowDraw() {
-  for (let i=0; i<arrowArray.length; i++) {
-    arrowArray[i].drawArrow();
-    arrowArray.splice(i, 1);
-    if (arrowArray.length < 40) {
-      setInterval(arrowDraw(), 3000);
-    }
+  if (arrowArray.length < 1) {
+    alert("GAME OVER");
+    document.location.reload();
   }
+  arrowArray[arrowSend].drawArrow();
+  arrowArray[arrowSend].dy = -3;
+  arrowSend ++;
+  console.log(arrowArray[arrowSend]);
+  setTimeout(arrowDraw, 800);
 }
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
-  for (let i=0; i<arrowArray.length; i++) {
-    arrowArray[i].start += dy;
+
+  if (leftPressed) {
+    if (arrowArray[0].x === 84.375 &&
+        arrowArray[0].y < 17 &&
+        arrowArray[0].y > -10) {
+      arrowArray[0].directionImage.src = "";
+    }
+  }
+  if (downPressed) {
+    if (arrowArray[0].x === 154.6875 &&
+        arrowArray[0].y < 17 &&
+        arrowArray[0].y > -10) {
+      arrowArray[0].directionImage.src = "";
+    }
+  }
+  if (upPressed) {
+    if (arrowArray[0].x === 225 &&
+        arrowArray[0].y < 17 &&
+        arrowArray[0].y > -10) {
+      arrowArray[0].directionImage.src = "";
+    }
+  }
+  if (rightPressed) {
+    if (arrowArray[0].x === 295.3125 &&
+        arrowArray[0].y < 17 &&
+        arrowArray[0].y > -10) {
+      arrowArray[0].directionImage.src = "";
+    }
   }
 };
 
 arrowDraw();
-
-// if (leftPressed) {
-//   if (arrowLeft.x === 84.375 &&
-//     arrowLeft.start + dy < 10 &&
-//     arrowLeft.start + dy > 0
-//   ) {  }
-// }
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -92,4 +115,4 @@ function keyUpHandler(e) {
   }
 }
 
-setInterval(draw, 6);
+setInterval(draw, 8);
