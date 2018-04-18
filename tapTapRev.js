@@ -41,15 +41,19 @@ for (let i=0; arrowArray.length < 40; i++) {
 function arrowDraw() {
   for (let i=0; i<arrowArray.length; i++) {
     arrowArray[i].drawArrow();
-    arrowArray[i].start += dy;
-    // arrowArray.splice(i, 1);
-    // setInterval(arrowDraw(), 3000);
+    arrowArray.splice(i, 1);
+    if (arrowArray.length < 40) {
+      setInterval(arrowDraw(), 3000);
+    }
   }
 }
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
+  for (let i=0; i<arrowArray.length; i++) {
+    arrowArray[i].start += dy;
+  }
 };
 
 arrowDraw();
