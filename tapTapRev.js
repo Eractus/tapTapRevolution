@@ -55,34 +55,35 @@ function arrowDraw() {
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
-
-  if (leftPressed) {
-    if (arrowArray[0].x === 84.375 &&
-        arrowArray[0].y < 17 &&
-        arrowArray[0].y > -10) {
-      arrowArray[0].directionImage.src = "";
-    }
-  }
-  if (downPressed) {
-    if (arrowArray[0].x === 154.6875 &&
-        arrowArray[0].y < 17 &&
-        arrowArray[0].y > -10) {
-      arrowArray[0].directionImage.src = "";
-    }
-  }
-  if (upPressed) {
-    if (arrowArray[0].x === 225 &&
-        arrowArray[0].y < 17 &&
-        arrowArray[0].y > -10) {
-      arrowArray[0].directionImage.src = "";
-    }
-  }
-  if (rightPressed) {
-    if (arrowArray[0].x === 295.3125 &&
-        arrowArray[0].y < 17 &&
-        arrowArray[0].y > -10) {
-      arrowArray[0].directionImage.src = "";
-    }
+  for (let i=0; i<arrowArray.length; i++) {
+    if (leftPressed) {
+      if (arrowArray[i].x === 84.375 &&
+        arrowArray[i].y < 17 &&
+        arrowArray[i].y > -10) {
+          arrowArray[i].directionImage.src = "";
+        }
+      }
+    if (downPressed) {
+      if (arrowArray[i].x === 154.6875 &&
+        arrowArray[i].y < 17 &&
+        arrowArray[i].y > -10) {
+          arrowArray[i].directionImage.src = "";
+        }
+      }
+    if (upPressed) {
+      if (arrowArray[i].x === 225 &&
+        arrowArray[i].y < 17 &&
+        arrowArray[i].y > -10) {
+          arrowArray[i].directionImage.src = "";
+        }
+      }
+    if (rightPressed) {
+      if (arrowArray[i].x === 295.3125 &&
+        arrowArray[i].y < 17 &&
+        arrowArray[i].y > -10) {
+          arrowArray[i].directionImage.src = "";
+        }
+      }
   }
 };
 
