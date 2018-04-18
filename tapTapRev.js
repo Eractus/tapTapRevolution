@@ -6,7 +6,6 @@ let downArrow = 2.75*(canvas.width/8);
 let upArrow = 4.0*(canvas.width/8);
 let rightArrow = 5.25*(canvas.width/8);
 let yStatic = 10;
-let start = canvas.height;
 let dy = -1;
 let leftPressed = false;
 let downPressed = false;
@@ -24,202 +23,43 @@ const drawStaticArrows = window.onload = function() {
   ctx.drawImage(rightS, rightArrow, yStatic, 75, 75);
 };
 
-function Sprite(img, width, height, positions) {
-  this.img = img;
-  this.width = width;
-  this.height = height;
-  this.positions = positions;
+function arrowCreate() {
+  let num = Math.floor(Math.random() * 4) + 1;
+  switch (num) {
+    case 1: return new Arrow("left");
+    case 2: return new Arrow("down");
+    case 3: return new Arrow("up");
+    case 4: return new Arrow("right");
+  }
 }
 
-Sprite.prototype = {
-  draw: function(position, x, y) {
-    let pos = this.positions[position];
-    ctx.drawImage(
-      this.img,
-      pos[0],
-      pos[1],
-      this.width,
-      this.height,
-      x, y,
-      this.width,
-      this.height
-    );
+let arrowArray = [];
+for (let i=0; arrowArray.length < 40; i++) {
+  arrowArray.push(arrowCreate());
+}
+
+function arrowDraw() {
+  for (let i=0; i<arrowArray.length; i++) {
+    arrowArray[i].drawArrow();
+    arrowArray[i].start += dy;
+    // arrowArray.splice(i, 1);
+    // setInterval(arrowDraw(), 3000);
   }
-};
-
-
-const drawLeftArrow = () => {
-  let leftarrow = new Image();
-  leftarrow.src = "assets/leftArrowDynamic.png";
-  leftarrow.addEventListener("load", loadArrow);
-
-  function loadArrow(e) {
-    animate();
-  }
-
-  let shift = 0;
-  let frameWidth = 75;
-  let frameHeight = 75;
-  let numFrames = 0;
-
-  function animate() {
-    numFrames ++;
-    ctx.clearRect(0, 0, frameWidth, frameHeight);
-    ctx.drawImage(
-      leftarrow,
-      shift,
-      0,
-      frameWidth,
-      frameHeight,
-      leftArrow,
-      start,
-      frameWidth,
-      frameHeight
-    );
-
-    if (numFrames === 15) {
-      shift += frameWidth;
-      numFrames = 0;
-      shift = shift === 1200 ? 0 : shift;
-    }
-
-    requestAnimationFrame(animate);
-
-  }
-};
-
-const drawDownArrow = () => {
-  let downarrow = new Image();
-  downarrow.src = "assets/downArrowDynamic.png";
-  downarrow.addEventListener("load", loadArrow);
-
-  function loadArrow(e) {
-    animate();
-  }
-
-  let shift = 300;
-  let frameWidth = 75;
-  let frameHeight = 75;
-  let numFrames = 0;
-
-  function animate() {
-    numFrames ++;
-    ctx.clearRect(0, 0, frameWidth, frameHeight);
-    ctx.drawImage(
-      downarrow,
-      shift,
-      0,
-      frameWidth,
-      frameHeight,
-      downArrow,
-      start,
-      frameWidth,
-      frameHeight
-    );
-
-    if (numFrames === 15) {
-      shift += frameWidth;
-      numFrames = 0;
-      shift = shift === 1200 ? 0 : shift;
-    }
-
-    requestAnimationFrame(animate);
-
-  }
-};
-const drawUpArrow = () => {
-  let uparrow = new Image();
-  uparrow.src = "assets/upArrowDynamic.png";
-  uparrow.addEventListener("load", loadArrow);
-
-  function loadArrow(e) {
-    animate();
-  }
-
-  let shift = 600;
-  let frameWidth = 75;
-  let frameHeight = 75;
-  let numFrames = 0;
-
-  function animate() {
-    numFrames ++;
-    ctx.clearRect(0, 0, frameWidth, frameHeight);
-    ctx.drawImage(
-      uparrow,
-      shift,
-      0,
-      frameWidth,
-      frameHeight,
-      upArrow,
-      start,
-      frameWidth,
-      frameHeight
-    );
-
-    if (numFrames === 15) {
-      shift += frameWidth;
-      numFrames = 0;
-      shift = shift === 1200 ? 0 : shift;
-    }
-
-    requestAnimationFrame(animate);
-
-  }
-};
-const drawRightArrow = () => {
-  let rightarrow = new Image();
-  rightarrow.src = "assets/rightArrowDynamic.png";
-  rightarrow.addEventListener("load", loadArrow);
-
-  function loadArrow(e) {
-    animate();
-  }
-
-  let shift = 900;
-  let frameWidth = 75;
-  let frameHeight = 75;
-  let numFrames = 0;
-
-  function animate() {
-    numFrames ++;
-    ctx.clearRect(0, 0, frameWidth, frameHeight);
-    ctx.drawImage(
-      rightarrow,
-      shift,
-      0,
-      frameWidth,
-      frameHeight,
-      rightArrow,
-      start,
-      frameWidth,
-      frameHeight
-    );
-
-    if (numFrames === 15) {
-      shift += frameWidth;
-      numFrames = 0;
-      shift = shift === 1200 ? 0 : shift;
-    }
-
-    requestAnimationFrame(animate);
-
-  }
-};
+}
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
-  start += dy;
 };
 
-drawLeftArrow();
-drawDownArrow();
-drawUpArrow();
-drawRightArrow();
+arrowDraw();
 
-if (leftPressed) {
-  
-}
+// if (leftPressed) {
+//   if (arrowLeft.x === 84.375 &&
+//     arrowLeft.start + dy < 10 &&
+//     arrowLeft.start + dy > 0
+//   ) {  }
+// }
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
