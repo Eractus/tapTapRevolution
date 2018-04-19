@@ -50,6 +50,17 @@ function arrowDraw() {
   setTimeout(arrowDraw, 400);
 }
 
+function playAgain() {
+  alert("Please Refresh to Play Again!");
+  document.location.reload();
+}
+
+function gameEnd() {
+  if (arrowArray[arrowArray.length - 1].y === 0) {
+    setTimeout(playAgain, 2000);
+  }
+}
+
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
@@ -58,39 +69,52 @@ const draw = () => {
       if (arrowArray[i].x === 84.375 &&
         arrowArray[i].y < 28 &&
         arrowArray[i].y > 0) {
+        if (arrowArray[i].points === 50) {
           score += 50;
-          arrowArray[i].directionImage.src = "";
-          scoreDisplay.innerHTML = score;
+          arrowArray[i].points = 0;
         }
+        arrowArray[i].directionImage.src = "";
+        scoreDisplay.innerHTML = score;
       }
+    }
     if (downPressed) {
       if (arrowArray[i].x === 154.6875 &&
         arrowArray[i].y < 28 &&
         arrowArray[i].y > 0) {
+        if (arrowArray[i].points === 50) {
           score += 50;
-          arrowArray[i].directionImage.src = "";
-          scoreDisplay.innerHTML = score;
+          arrowArray[i].points = 0;
         }
+        arrowArray[i].directionImage.src = "";
+        scoreDisplay.innerHTML = score;
       }
+    }
     if (upPressed) {
       if (arrowArray[i].x === 225 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 0) {
+      arrowArray[i].y < 28 &&
+      arrowArray[i].y > 0) {
+        if (arrowArray[i].points === 50) {
           score += 50;
-          arrowArray[i].directionImage.src = "";
-          scoreDisplay.innerHTML = score;
+          arrowArray[i].points = 0;
         }
+        arrowArray[i].directionImage.src = "";
+        scoreDisplay.innerHTML = score;
       }
+    }
     if (rightPressed) {
       if (arrowArray[i].x === 295.3125 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 0) {
+      arrowArray[i].y < 28 &&
+      arrowArray[i].y > 0) {
+        if (arrowArray[i].points === 50) {
           score += 50;
-          arrowArray[i].directionImage.src = "";
-          scoreDisplay.innerHTML = score;
+          arrowArray[i].points = 0;
         }
+        arrowArray[i].directionImage.src = "";
+        scoreDisplay.innerHTML = score;
       }
+    }
   }
+  gameEnd();
 };
 
 arrowDraw();
