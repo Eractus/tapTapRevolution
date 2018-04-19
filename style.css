@@ -1,5 +1,5 @@
 body {
-  background-image: url("Background.jpg");
+  background-image: url("./assets/Background.jpg");
   background-size: cover;
   display: flex;
   position: relative;
@@ -7,8 +7,25 @@ body {
   margin: auto;
 }
 
-img {
-  display: none;
+#links {
+  /* border: 3px solid #fff;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: rgba(0, 200, 200, 0.5); */
+  position: absolute;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+#github {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+#linkedin {
+  max-width: 40px;
+  max-height: 40px;
 }
 
 #score {
@@ -23,8 +40,8 @@ img {
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 18px;
   position: absolute;
-  left: -150px;
-  top: 150px;
+  left: -200px;
+  top: 250px;
   color: #fff;
   border: 3px solid #fff;
   border-radius: 3px;
@@ -47,4 +64,8 @@ img {
 #directions-list > li {
   margin-right: 15px;
   margin-bottom: 8px;
+}
+
+#duplicates {
+  display: none;
 }
