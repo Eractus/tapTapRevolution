@@ -146,4 +146,13 @@ function keyUpHandler(e) {
   }
 }
 
+function toggleMuteButton() {
+  let sound = document.getElementById("player");
+  if (sound.muted === false) {
+    sound.muted = true;
+  } else if (sound.muted === true){
+    sound.muted = false;
+  }
+}
+
 setInterval(draw, 8);

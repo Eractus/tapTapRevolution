@@ -15,10 +15,10 @@
     <div id="directions">
       <div>Directions</div>
       <ul id="directions-list">
-        <li>&larr;:   A</li>
-        <li>&darr;:   S</li>
-        <li>&uarr;:   W</li>
-        <li>&rarr;:   D</li>
+        <li>&larr;: A</li>
+        <li>&darr;: S</li>
+        <li>&uarr;: W</li>
+        <li>&rarr;: D</li>
       </ul>
     </div>
     <div id="duplicates">
@@ -27,8 +27,10 @@
       <img id="up arrow static" src="./assets/staticUp.png">
       <img id="right arrow static" src="./assets/staticRight.png">
     </div>
-    <audio src="./assets/captainJack.mp3" autoplay>
-    </audio>
+    <audio id="player" src="./assets/captainJack.mp3" autoplay></audio>
+    <div>
+      <img onClick="toggleMuteButton()" id="mute-button" src="./assets/sound.png">
+    </div>
   </body>
   <script src="arrow.js" type="text/javascript"></script>
   <script src="tapTapRev.js" type="text/javascript"></script>
