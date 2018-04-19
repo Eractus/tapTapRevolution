@@ -37,7 +37,7 @@ function arrowCreate() {
 }
 
 let arrowArray = [];
-for (let i=0; arrowArray.length < 100; i++) {
+for (let i=0; arrowArray.length < 215; i++) {
   arrowArray.push(arrowCreate());
 }
 
