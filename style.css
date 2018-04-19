@@ -7,10 +7,6 @@ body {
   margin: auto;
 }
 
-#ttrCanvas {
-
-}
-
 img {
   display: none;
 }
@@ -20,5 +16,35 @@ img {
   position: absolute;
   font-size: 25px;
   top: 10px;
-  left: 50%;
+  left: calc(50% - 50px);
+}
+
+#directions {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  position: absolute;
+  left: -150px;
+  top: 150px;
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+#directions > div {
+  text-align: center;
+  border-bottom: 3px solid #fff;
+}
+
+#directions-list {
+  max-width: 90px;
+  flex-wrap: wrap;
+  display: flex;
+  color: #fff;
+  list-style-type: none;
+}
+
+#directions-list > li {
+  margin-right: 15px;
+  margin-bottom: 8px;
 }

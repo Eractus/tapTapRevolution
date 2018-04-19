@@ -37,7 +37,7 @@ function arrowCreate() {
 }
 
 let arrowArray = [];
-for (let i=0; arrowArray.length < 40; i++) {
+for (let i=0; arrowArray.length < 100; i++) {
   arrowArray.push(arrowCreate());
 }
 
@@ -45,9 +45,9 @@ let arrowSend = 0;
 
 function arrowDraw() {
   arrowArray[arrowSend].drawArrow();
-  arrowArray[arrowSend].dy = -3;
+  arrowArray[arrowSend].dy = -5;
   arrowSend ++;
-  setTimeout(arrowDraw, 800);
+  setTimeout(arrowDraw, 400);
 }
 
 const draw = () => {
@@ -56,8 +56,8 @@ const draw = () => {
   for (let i=0; i<arrowArray.length; i++) {
     if (leftPressed) {
       if (arrowArray[i].x === 84.375 &&
-        arrowArray[i].y < 17 &&
-        arrowArray[i].y > -10) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 0) {
           score += 50;
           arrowArray[i].directionImage.src = "";
           scoreDisplay.innerHTML = score;
@@ -65,8 +65,8 @@ const draw = () => {
       }
     if (downPressed) {
       if (arrowArray[i].x === 154.6875 &&
-        arrowArray[i].y < 17 &&
-        arrowArray[i].y > -10) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 0) {
           score += 50;
           arrowArray[i].directionImage.src = "";
           scoreDisplay.innerHTML = score;
@@ -74,8 +74,8 @@ const draw = () => {
       }
     if (upPressed) {
       if (arrowArray[i].x === 225 &&
-        arrowArray[i].y < 17 &&
-        arrowArray[i].y > -10) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 0) {
           score += 50;
           arrowArray[i].directionImage.src = "";
           scoreDisplay.innerHTML = score;
@@ -83,8 +83,8 @@ const draw = () => {
       }
     if (rightPressed) {
       if (arrowArray[i].x === 295.3125 &&
-        arrowArray[i].y < 17 &&
-        arrowArray[i].y > -10) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 0) {
           score += 50;
           arrowArray[i].directionImage.src = "";
           scoreDisplay.innerHTML = score;
@@ -99,25 +99,25 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.keyCode === 37) {
+  if (e.keyCode === 65) {
     leftPressed = true;
-  } else if (e.keyCode === 38) {
+  } else if (e.keyCode === 87) {
     upPressed = true;
-  } else if (e.keyCode === 39) {
+  } else if (e.keyCode === 68) {
     rightPressed = true;
-  } else if (e.keyCode === 40) {
+  } else if (e.keyCode === 83) {
     downPressed = true;
   }
 }
 
 function keyUpHandler(e) {
-  if (e.keyCode === 37) {
+  if (e.keyCode === 65) {
     leftPressed = false;
-  } else if (e.keyCode === 38) {
+  } else if (e.keyCode === 87) {
     upPressed = false;
-  } else if (e.keyCode === 39) {
+  } else if (e.keyCode === 68) {
     rightPressed = false;
-  } else if (e.keyCode === 40) {
+  } else if (e.keyCode === 83) {
     downPressed = false;
   }
 }
