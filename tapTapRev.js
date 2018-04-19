@@ -1,16 +1,19 @@
 const canvas = document.getElementById("ttrCanvas");
 const ctx = canvas.getContext("2d");
 
+let scoreDisplay = document.getElementById("score");
+
 let leftArrow = 1.5*(canvas.width/8);
 let downArrow = 2.75*(canvas.width/8);
 let upArrow = 4.0*(canvas.width/8);
 let rightArrow = 5.25*(canvas.width/8);
-let yStatic = 10;
+let yStatic = 40;
 let y = canvas.height;
 let leftPressed = false;
 let downPressed = false;
 let upPressed = false;
 let rightPressed = false;
+let score = 0;
 
 const drawStaticArrows = window.onload = function() {
   let leftS = document.getElementById("left arrow static");
@@ -41,14 +44,9 @@ for (let i=0; arrowArray.length < 40; i++) {
 let arrowSend = 0;
 
 function arrowDraw() {
-  if (arrowArray.length < 1) {
-    alert("GAME OVER");
-    document.location.reload();
-  }
   arrowArray[arrowSend].drawArrow();
   arrowArray[arrowSend].dy = -3;
   arrowSend ++;
-  console.log(arrowArray[arrowSend]);
   setTimeout(arrowDraw, 800);
 }
 
@@ -60,28 +58,36 @@ const draw = () => {
       if (arrowArray[i].x === 84.375 &&
         arrowArray[i].y < 17 &&
         arrowArray[i].y > -10) {
+          score += 50;
           arrowArray[i].directionImage.src = "";
+          scoreDisplay.innerHTML = score;
         }
       }
     if (downPressed) {
       if (arrowArray[i].x === 154.6875 &&
         arrowArray[i].y < 17 &&
         arrowArray[i].y > -10) {
+          score += 50;
           arrowArray[i].directionImage.src = "";
+          scoreDisplay.innerHTML = score;
         }
       }
     if (upPressed) {
       if (arrowArray[i].x === 225 &&
         arrowArray[i].y < 17 &&
         arrowArray[i].y > -10) {
+          score += 50;
           arrowArray[i].directionImage.src = "";
+          scoreDisplay.innerHTML = score;
         }
       }
     if (rightPressed) {
       if (arrowArray[i].x === 295.3125 &&
         arrowArray[i].y < 17 &&
         arrowArray[i].y > -10) {
+          score += 50;
           arrowArray[i].directionImage.src = "";
+          scoreDisplay.innerHTML = score;
         }
       }
   }

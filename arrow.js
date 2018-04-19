@@ -41,7 +41,7 @@ class Arrow {
   drawArrow() {
     // this.directionImage.addEventListener("load", (e) => animate());
     let numFrames = 0;
-    console.dir(`initial call: ${this.direction}`);
+    // console.dir(`initial call: ${this.direction}`);
     const animate = () => {
       // console.dir(`start animate: ${this.direction}`);
       numFrames ++;
