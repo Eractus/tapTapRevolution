@@ -136,10 +136,9 @@ const draw = () => {
       }
     }
     if (arrowArray[i].y <= 1 && arrowArray[i].points !== 0) {
-      // debugger;
       combo = 0;
       comboDisplay.innerHTML = "";
-      arrowArray.splice(i, 1);
+      arrowArray[i].points = 0;
     }
   }
   gameEnd();
