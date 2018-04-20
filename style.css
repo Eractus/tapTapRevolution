@@ -5,6 +5,7 @@ body {
   position: relative;
   width: 40vw;
   margin: auto;
+  height: 100vh;
 }
 
 #links {
