@@ -33,14 +33,14 @@ body {
 }
 
 #combo {
-  font-size: 28px;
+  font-family: 'Monoton', cursive;
+  font-size: 50px;
   position: absolute;
-  left: 20px;
+  left: -30px;
   top: 200px;
   color: #f46530;
-  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 3px;
-  padding: 5px;
+  padding: 0 10px;
 }
 
 #directions {
