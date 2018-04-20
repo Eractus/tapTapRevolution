@@ -32,6 +32,10 @@ body {
   left: calc(50% - 50px);
 }
 
+/* #combo {
+  color: #fff;
+} */
+
 #directions {
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 18px;

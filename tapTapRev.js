@@ -2,6 +2,7 @@ const canvas = document.getElementById("ttrCanvas");
 const ctx = canvas.getContext("2d");
 
 let scoreDisplay = document.getElementById("score");
+let comboDisplay = document.getElementById("combo");
 
 let leftArrow = 1.5*(canvas.width/8);
 let downArrow = 2.75*(canvas.width/8);
@@ -14,6 +15,7 @@ let downPressed = false;
 let upPressed = false;
 let rightPressed = false;
 let score = 0;
+// let combo = 0;
 
 const drawStaticArrows = window.onload = function() {
   let leftS = document.getElementById("left arrow static");
@@ -68,51 +70,75 @@ const draw = () => {
     if (leftPressed) {
       if (arrowArray[i].x === 84.375 &&
         arrowArray[i].y < 28 &&
-        arrowArray[i].y > 0) {
+        arrowArray[i].y > 1) {
+        // if (arrowArray[i].combo === 1) {
+        //   combo += 1;
+        //   arrowArray[i].combo = 0;
+        // }
+        // comboDisplay.innerHTML = "Combo: " + combo;
         if (arrowArray[i].points === 50) {
           score += 50;
           arrowArray[i].points = 0;
         }
-        arrowArray[i].directionImage.src = "";
         scoreDisplay.innerHTML = score;
+        arrowArray[i].directionImage.src = "";
       }
     }
     if (downPressed) {
       if (arrowArray[i].x === 154.6875 &&
         arrowArray[i].y < 28 &&
-        arrowArray[i].y > 0) {
+        arrowArray[i].y > 1) {
+        // if (arrowArray[i].combo === 1) {
+        //   combo += 1;
+        //   arrowArray[i].combo = 0;
+        // }
+        // comboDisplay.innerHTML = "Combo: " + combo;
         if (arrowArray[i].points === 50) {
           score += 50;
           arrowArray[i].points = 0;
         }
-        arrowArray[i].directionImage.src = "";
         scoreDisplay.innerHTML = score;
+        arrowArray[i].directionImage.src = "";
       }
     }
     if (upPressed) {
       if (arrowArray[i].x === 225 &&
-      arrowArray[i].y < 28 &&
-      arrowArray[i].y > 0) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1) {
+        // if (arrowArray[i].combo === 1) {
+        //   combo += 1;
+        //   arrowArray[i].combo = 0;
+        // }
+        // comboDisplay.innerHTML = "Combo: " + combo;
         if (arrowArray[i].points === 50) {
           score += 50;
           arrowArray[i].points = 0;
         }
-        arrowArray[i].directionImage.src = "";
         scoreDisplay.innerHTML = score;
+        arrowArray[i].directionImage.src = "";
       }
     }
     if (rightPressed) {
       if (arrowArray[i].x === 295.3125 &&
-      arrowArray[i].y < 28 &&
-      arrowArray[i].y > 0) {
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1) {
+        // if (arrowArray[i].combo === 1) {
+        //   combo += 1;
+        //   arrowArray[i].combo = 0;
+        // }
+        // comboDisplay.innerHTML = "Combo: " + combo;
         if (arrowArray[i].points === 50) {
           score += 50;
           arrowArray[i].points = 0;
         }
-        arrowArray[i].directionImage.src = "";
         scoreDisplay.innerHTML = score;
+        arrowArray[i].directionImage.src = "";
       }
     }
+    // if (arrowArray[i].y === 1 && arrowArray[i].directionImage.src !== "") {
+    //   combo = 0;
+    //   scoreDisplay.innerHTML = "Combo: 0";
+    // }
   }
   gameEnd();
 };
