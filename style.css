@@ -3,9 +3,13 @@ body {
   background-size: cover;
   display: flex;
   position: relative;
-  width: 40vw;
   margin: auto;
+  width: 40vw;
   height: 100vh;
+}
+
+#ttrCanvas {
+  width: 30vw;
 }
 
 #links {
