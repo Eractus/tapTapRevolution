@@ -27,14 +27,21 @@ body {
 #score {
   color: #ffff88;
   position: absolute;
-  font-size: 25px;
+  font-size: 28px;
   top: 10px;
   left: calc(50% - 50px);
 }
 
-/* #combo {
-  color: #fff;
-} */
+#combo {
+  font-size: 28px;
+  position: absolute;
+  left: 20px;
+  top: 200px;
+  color: #f46530;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  padding: 5px;
+}
 
 #directions {
   background-color: rgba(0, 0, 0, 0.5);

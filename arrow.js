@@ -6,7 +6,7 @@ class Arrow {
     this.y = 650;
     this.dy = 0;
     this.points = 50;
-    // this.combo = 1;
+    this.combo = 1;
     this.drawArrow = this.drawArrow.bind(this);
     this.arrowParams(direction);
   }
