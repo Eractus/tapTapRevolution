@@ -5,8 +5,8 @@ class Arrow {
     this.height = 75;
     this.y = 650;
     this.dy = 0;
-    this.points = 50;
-    this.combo = 1;
+    this.points = true;
+    this.combo = true;
     this.drawArrow = this.drawArrow.bind(this);
     this.arrowParams(direction);
   }
@@ -41,13 +41,9 @@ class Arrow {
   }
 
   drawArrow() {
-    // this.directionImage.addEventListener("load", (e) => animate());
     let numFrames = 0;
-    // console.dir(`initial call: ${this.direction}`);
     const animate = () => {
-      // console.dir(`start animate: ${this.direction}`);
       numFrames ++;
-      // ctx.clearRect(0, 0, this.width, this.height);
       ctx.drawImage(
         this.directionImage,
         this.shift,
@@ -59,17 +55,13 @@ class Arrow {
         this.width,
         this.height
       );
-      // console.dir(`after draw: ${this.direction}`);
       this.y += this.dy;
-      // console.dir(`after this.y: ${this.direction}`);
       if (numFrames === 15) {
         this.shift += this.width;
         numFrames = 0;
         this.shift = this.shift === 1200 ? 0 : this.shift;
       }
-      // console.dir(`before requestAnimationFrame: ${this.direction}`);
       requestAnimationFrame(animate);
-      // setTimeout(animate, 33);
     };
     animate();
   }

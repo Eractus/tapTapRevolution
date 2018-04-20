@@ -66,79 +66,128 @@ function gameEnd() {
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
+
   for (let i=0; i<arrowArray.length; i++) {
     if (leftPressed) {
-      if (arrowArray[i].x === 84.375 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 1) {
-        if (arrowArray[i].combo === 1) {
+      if (arrowArray[i].x === 84.375 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+        if (arrowArray[i].combo === true) {
           combo += 1;
-          arrowArray[i].combo = 0;
+          arrowArray[i].combo = false;
         }
         comboDisplay.innerHTML = combo;
-        if (arrowArray[i].points === 50) {
+
+        if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
-          arrowArray[i].points = 0;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 10 && combo <= 25) {
+          score += 75;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
+          score += 100;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+          score += 150;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 100) {
+          score += 200;
+          arrowArray[i].points = false;
         }
         scoreDisplay.innerHTML = score;
         arrowArray[i].directionImage.src = "";
       }
     }
+
     if (downPressed) {
-      if (arrowArray[i].x === 154.6875 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 1) {
-        if (arrowArray[i].combo === 1) {
+      if (arrowArray[i].x === 154.6875 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+        if (arrowArray[i].combo === true) {
           combo += 1;
-          arrowArray[i].combo = 0;
+          arrowArray[i].combo = false;
         }
         comboDisplay.innerHTML = combo;
-        if (arrowArray[i].points === 50) {
+
+        if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
-          arrowArray[i].points = 0;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 10 && combo <= 25) {
+          score += 75;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
+          score += 100;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+          score += 150;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 100) {
+          score += 200;
+          arrowArray[i].points = false;
         }
         scoreDisplay.innerHTML = score;
         arrowArray[i].directionImage.src = "";
       }
     }
+
     if (upPressed) {
-      if (arrowArray[i].x === 225 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 1) {
-        if (arrowArray[i].combo === 1) {
+      if (arrowArray[i].x === 225 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+        if (arrowArray[i].combo === true) {
           combo += 1;
-          arrowArray[i].combo = 0;
+          arrowArray[i].combo = false;
         }
         comboDisplay.innerHTML = combo;
-        if (arrowArray[i].points === 50) {
+
+        if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
-          arrowArray[i].points = 0;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 10 && combo <= 25) {
+          score += 75;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
+          score += 100;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+          score += 150;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 100) {
+          score += 200;
+          arrowArray[i].points = false;
         }
         scoreDisplay.innerHTML = score;
         arrowArray[i].directionImage.src = "";
       }
     }
+
     if (rightPressed) {
-      if (arrowArray[i].x === 295.3125 &&
-        arrowArray[i].y < 28 &&
-        arrowArray[i].y > 1) {
-        if (arrowArray[i].combo === 1) {
+      if (arrowArray[i].x === 295.3125 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+        if (arrowArray[i].combo === true) {
           combo += 1;
-          arrowArray[i].combo = 0;
+          arrowArray[i].combo = false;
         }
         comboDisplay.innerHTML = combo;
-        if (arrowArray[i].points === 50) {
+
+        if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
-          arrowArray[i].points = 0;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 10 && combo <= 25) {
+          score += 75;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
+          score += 100;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+          score += 150;
+          arrowArray[i].points = false;
+        } else if (arrowArray[i].points === true && combo > 100) {
+          score += 200;
+          arrowArray[i].points = false;
         }
         scoreDisplay.innerHTML = score;
         arrowArray[i].directionImage.src = "";
       }
     }
-    if (arrowArray[i].y <= 1 && arrowArray[i].points !== 0) {
+
+    if (arrowArray[i].y <= 1 && arrowArray[i].points !== false) {
       combo = 0;
       comboDisplay.innerHTML = "";
-      arrowArray[i].points = 0;
+      arrowArray[i].points = false;
     }
   }
   gameEnd();
