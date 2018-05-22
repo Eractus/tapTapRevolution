@@ -92,7 +92,7 @@ const draw = () => {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = score;
+        scoreDisplay.innerHTML = "Score: "+`${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
@@ -121,7 +121,7 @@ const draw = () => {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = score;
+        scoreDisplay.innerHTML = "Score: "+`${score}`
         arrowArray[i].directionImage.src = "";
       }
     }
@@ -150,7 +150,7 @@ const draw = () => {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = score;
+        scoreDisplay.innerHTML = "Score: "+`${score}`
         arrowArray[i].directionImage.src = "";
       }
     }
@@ -179,7 +179,7 @@ const draw = () => {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = score;
+        scoreDisplay.innerHTML = "Score: "+`${score}`
         arrowArray[i].directionImage.src = "";
       }
     }
@@ -199,25 +199,25 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.keyCode === 65) {
+  if (e.keyCode === 37) {
     leftPressed = true;
-  } else if (e.keyCode === 87) {
+  } else if (e.keyCode === 38) {
     upPressed = true;
-  } else if (e.keyCode === 68) {
+  } else if (e.keyCode === 39) {
     rightPressed = true;
-  } else if (e.keyCode === 83) {
+  } else if (e.keyCode === 40) {
     downPressed = true;
   }
 }
 
 function keyUpHandler(e) {
-  if (e.keyCode === 65) {
+  if (e.keyCode === 37) {
     leftPressed = false;
-  } else if (e.keyCode === 87) {
+  } else if (e.keyCode === 38) {
     upPressed = false;
-  } else if (e.keyCode === 68) {
+  } else if (e.keyCode === 39) {
     rightPressed = false;
-  } else if (e.keyCode === 83) {
+  } else if (e.keyCode === 40) {
     downPressed = false;
   }
 }
