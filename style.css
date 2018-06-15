@@ -35,7 +35,7 @@ body {
   position: absolute;
   font-size: 28px;
   top: 10px;
-  left: calc(50% - 100px);
+  left: calc(50% - 85px);
 }
 
 #combo {
