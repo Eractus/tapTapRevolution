@@ -16,6 +16,7 @@ let upPressed = false;
 let rightPressed = false;
 let score = 0;
 let combo = 0;
+let mainSong = document.getElementById("player");
 
 const drawStaticArrows = window.onload = function() {
   let leftS = document.getElementById("left arrow static");
@@ -66,6 +67,7 @@ function gameEnd() {
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawStaticArrows();
+  mainSong.play();
 
   for (let i=0; i<arrowArray.length; i++) {
     if (leftPressed) {
