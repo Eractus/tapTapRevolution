@@ -1,4 +1,4 @@
-class Arrow {
+class ArrowSprite {
   constructor(direction) {
     this.direction = direction;
     this.width = 75;

@@ -32,10 +32,10 @@ const drawStaticArrows = window.onload = function() {
 function arrowCreate() {
   let num = Math.floor(Math.random() * 4) + 1;
   switch (num) {
-    case 1: return new Arrow("left");
-    case 2: return new Arrow("down");
-    case 3: return new Arrow("up");
-    case 4: return new Arrow("right");
+    case 1: return new ArrowSprite("left");
+    case 2: return new ArrowSprite("down");
+    case 3: return new ArrowSprite("up");
+    case 4: return new ArrowSprite("right");
   }
 }
 
@@ -181,7 +181,7 @@ const draw = () => {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = "Score: "+`${score}`
+        scoreDisplay.innerHTML = "Score: "+`${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
@@ -196,41 +196,5 @@ const draw = () => {
 };
 
 arrowDraw();
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
-  if (e.keyCode === 37) {
-    leftPressed = true;
-  } else if (e.keyCode === 38) {
-    upPressed = true;
-  } else if (e.keyCode === 39) {
-    rightPressed = true;
-  } else if (e.keyCode === 40) {
-    downPressed = true;
-  }
-}
-
-function keyUpHandler(e) {
-  if (e.keyCode === 37) {
-    leftPressed = false;
-  } else if (e.keyCode === 38) {
-    upPressed = false;
-  } else if (e.keyCode === 39) {
-    rightPressed = false;
-  } else if (e.keyCode === 40) {
-    downPressed = false;
-  }
-}
-
-function toggleMuteButton() {
-  let sound = document.getElementById("player");
-  if (sound.muted === false) {
-    sound.muted = true;
-  } else if (sound.muted === true){
-    sound.muted = false;
-  }
-}
 
 setInterval(draw, 8);
