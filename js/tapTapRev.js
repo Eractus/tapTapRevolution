@@ -53,6 +53,12 @@ function arrowDraw() {
   setTimeout(arrowDraw, 400);
 }
 
+function gameStart() {
+  mainSong.play();
+  draw();
+  arrowDraw();
+}
+
 function playAgain() {
   alert("Please Refresh to Play Again!");
   document.location.reload();
@@ -66,8 +72,8 @@ function gameEnd() {
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   drawStaticArrows();
-  mainSong.play();
 
   for (let i=0; i<arrowArray.length; i++) {
     if (leftPressed) {
@@ -194,7 +200,5 @@ const draw = () => {
   }
   gameEnd();
 };
-
-arrowDraw();
 
 setInterval(draw, 8);
