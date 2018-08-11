@@ -16,8 +16,11 @@
     <canvas id="ttrCanvas" width="450" height="630"></canvas>
     <div id="title">Tap Tap Revolution</div>
     <div id="startGameModal">
-      <p>Tap Tap Revolution!</p>
-      <button onClick="gameStart()">Play!</button>
+      <div id="introMessage">
+        <h3>Tap Tap Revolution!</h3>
+        <p>A mostly faithful recreation of the classic DDR game! Use the direction keys to play. You can mute/unmute the music by clicking the volume icon.</p>
+        <button id="playButton" onClick="gameStart()">Play!</button>
+      </div>
     </div>
     <div id="directions">
       <div>How To Play</div>

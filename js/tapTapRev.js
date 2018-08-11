@@ -54,6 +54,8 @@ function arrowDraw() {
 }
 
 function gameStart() {
+  let startModal = document.getElementById("startGameModal");
+  startModal.style.display = "none";
   mainSong.play();
   draw();
   arrowDraw();

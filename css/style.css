@@ -9,6 +9,58 @@ body {
   height: 100vh;
 }
 
+#startGameModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  background-color: black;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#introMessage {
+  border: 3px solid #fff;
+  border-radius: 3px;
+  background-color: black;
+  opacity: 1;
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 35%;
+  padding: 5% 2%;
+}
+
+#introMessage > h3 {
+  font-family: 'Monoton', cursive;
+  color: #e5ff00;
+}
+
+#playButton {
+  color: black;
+  font-size: 20px;
+  border: 1px solid #fff;
+  height: 40px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  padding: 3px;
+}
+
+#playButton:active {
+  background-color: grey;
+}
+
 #ttrCanvas {
   width: 30vw;
 }
