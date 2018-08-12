@@ -40,7 +40,7 @@ function arrowCreate() {
 }
 
 let arrowArray = [];
-for (let i=0; arrowArray.length < 215; i++) {
+for (let i=0; arrowArray.length < 145; i++) {
   arrowArray.push(arrowCreate());
 }
 
@@ -48,7 +48,7 @@ let arrowSend = 0;
 
 function arrowDraw() {
   arrowArray[arrowSend].drawArrow();
-  arrowArray[arrowSend].dy = -3;
+  arrowArray[arrowSend].dy = -4;
   arrowSend ++;
   setTimeout(arrowDraw, 600);
 }
@@ -61,15 +61,15 @@ function gameStart() {
   arrowDraw();
 }
 
-function playAgain() {
-  alert("Please Refresh to Play Again!");
-  document.location.reload();
-}
-
 function gameEnd() {
   if (arrowArray[arrowArray.length - 1].y === 0) {
     setTimeout(playAgain, 2000);
   }
+}
+
+function playAgain() {
+  alert("Please Refresh to Play Again!");
+  document.location.reload();
 }
 
 const draw = () => {
