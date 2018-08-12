@@ -48,9 +48,9 @@ let arrowSend = 0;
 
 function arrowDraw() {
   arrowArray[arrowSend].drawArrow();
-  arrowArray[arrowSend].dy = -5;
+  arrowArray[arrowSend].dy = -3;
   arrowSend ++;
-  setTimeout(arrowDraw, 400);
+  setTimeout(arrowDraw, 600);
 }
 
 function gameStart() {

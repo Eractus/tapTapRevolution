@@ -29,7 +29,7 @@ body {
   background-color: black;
   opacity: 1;
   color: #fff;
-  font-size: 24px;
+  font-size: 28px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -37,10 +37,11 @@ body {
   justify-content: center;
   z-index: 10;
   width: 35%;
-  padding: 5% 2%;
+  padding: 5% 3%;
 }
 
 #introMessage > h3 {
+  font-size: 38px;
   font-family: 'Monoton', cursive;
   color: #e5ff00;
 }
@@ -57,8 +58,12 @@ body {
   padding: 3px;
 }
 
+#playButton:hover {
+  background-color: #b2b2b2;
+}
+
 #playButton:active {
-  background-color: grey;
+  background-color: #7f7f7f;
 }
 
 #ttrCanvas {
