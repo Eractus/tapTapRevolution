@@ -15,6 +15,9 @@ function keyDownHandler(e) {
     case 40:
       downPressed = true;
       break;
+    case 80:
+      gamePause();
+      break;
   }
 }
 

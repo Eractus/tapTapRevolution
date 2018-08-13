@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 let scoreDisplay = document.getElementById("score");
 let comboDisplay = document.getElementById("combo");
 
+let pause = false;
 let leftArrow = 1.5*(canvas.width/8);
 let downArrow = 2.75*(canvas.width/8);
 let upArrow = 4.0*(canvas.width/8);
@@ -47,18 +48,35 @@ for (let i=0; arrowArray.length < 145; i++) {
 let arrowSend = 0;
 
 function arrowDraw() {
-  arrowArray[arrowSend].drawArrow();
-  arrowArray[arrowSend].dy = -4;
-  arrowSend ++;
-  setTimeout(arrowDraw, 600);
+  if (!pause) {
+    arrowArray[arrowSend].drawArrow();
+    for (let i=0; i <= arrowSend; i++) {
+      arrowArray[i].dy = -4;
+    }
+    arrowSend ++;
+    setTimeout(arrowDraw, 600);
+  } else if (pause) {
+    for (let i=0; i <= arrowSend; i++) {
+      arrowArray[i].dy = 0;
+    }
+    setTimeout(arrowDraw, 100);
+  }
 }
 
 function gameStart() {
   let startModal = document.getElementById("startGameModal");
   startModal.style.display = "none";
   mainSong.play();
-  draw();
   arrowDraw();
+  setInterval(draw, 1);
+  if (pause === true) {
+    gamePause();
+  }
+}
+
+function gamePause() {
+  pause = !pause;
+  pause ? mainSong.pause() : mainSong.play();
 }
 
 function gameEnd() {
@@ -202,5 +220,3 @@ const draw = () => {
   }
   gameEnd();
 };
-
-setInterval(draw, 8);
