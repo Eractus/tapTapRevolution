@@ -18,6 +18,9 @@ function keyDownHandler(e) {
     case 80:
       gamePause();
       break;
+    case 82:
+      gameRestart();
+      break;
   }
 }
 

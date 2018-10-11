@@ -79,6 +79,17 @@ function gamePause() {
   pause ? mainSong.pause() : mainSong.play();
 }
 
+function gameRestart() {
+  arrowArray = arrowArray.map(arrow => arrow.y = canvas.height);
+  arrowArray = [];
+  for (let i=0; arrowArray.length < 145; i++) {
+    arrowArray.push(arrowCreate());
+  }
+  arrowSend = 0;
+  mainSong.currentTime = 0;
+  gameStart();
+}
+
 function gameEnd() {
   if (arrowArray[arrowArray.length - 1].y === 0) {
     setTimeout(playAgain, 2000);
