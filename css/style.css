@@ -23,7 +23,22 @@ body {
   justify-content: center;
 }
 
-#introMessage {
+#endGameModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+#modalMessage {
   border: 3px solid #fff;
   border-radius: 3px;
   background-color: black;
@@ -40,7 +55,7 @@ body {
   padding: 5% 3%;
 }
 
-#introMessage > h3 {
+#modalMessage > h3 {
   font-size: 38px;
   font-family: 'Monoton', cursive;
   color: #e5ff00;

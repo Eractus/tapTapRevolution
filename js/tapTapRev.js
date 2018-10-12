@@ -5,6 +5,8 @@ let scoreDisplay = document.getElementById("score");
 let comboDisplay = document.getElementById("combo");
 
 let pause = false;
+let restart = false;
+let ended = false;
 let leftArrow = 1.5*(canvas.width/8);
 let downArrow = 2.75*(canvas.width/8);
 let upArrow = 4.0*(canvas.width/8);
@@ -19,7 +21,7 @@ let arrowArray = [];
 let nextArrow;
 let score = 0;
 let combo = 0;
-let mainSong = document.getElementById("player");
+let mainSong = document.getElementById("main-song");
 
 const drawStaticArrows = window.onload = function() {
   let leftS = document.getElementById("left arrow static");
@@ -42,34 +44,27 @@ function arrowCreate() {
   }
 }
 
-// function arrowDraw() {
-//   if (!pause) {
-//     arrowArray[arrowSend].drawArrow();
-//     for (let i=0; i <= arrowSend; i++) {
-//       arrowArray[i].dy = -4;
-//     }
-//     arrowSend ++;
-//     setTimeout(arrowDraw, 600);
-//   } else if (pause) {
-//     for (let i=0; i <= arrowSend; i++) {
-//       arrowArray[i].dy = 0;
-//     }
-//     setTimeout(arrowDraw, 100);
-//   }
-// }
-
 function arrowDraw() {
+  console.log(arrowArray.length);
   if (!pause) {
-    nextArrow = arrowCreate();
-    arrowArray.push(nextArrow);
-    arrowArray[arrowArray.length-1].drawArrow();
-    arrowArray.forEach(arrow => arrow.dy = -4);
-    setTimeout(arrowDraw, 600);
-  } else if (pause) {
-    for (let i=0; i < arrowArray.length; i++) {
-      arrowArray[i].dy = 0;
+    if (ended || restart) {
+      return;
+    } else {
+      nextArrow = arrowCreate();
+      arrowArray.push(nextArrow);
+      arrowArray[arrowArray.length-1].drawArrow();
+      arrowArray.forEach(arrow => arrow.dy = -4);
+      setTimeout(arrowDraw, 600);
     }
-    setTimeout(arrowDraw, 100);
+  } else if (pause) {
+    if (ended || restart) {
+      return;
+    } else {
+      for (let i=0; i < arrowArray.length; i++) {
+        arrowArray[i].dy = 0;
+      }
+      setTimeout(arrowDraw, 100);
+    }
   }
 }
 
@@ -79,9 +74,6 @@ function gameStart() {
   mainSong.play();
   arrowDraw();
   setInterval(draw, 1);
-  if (pause === true) {
-    gamePause();
-  }
 }
 
 function gamePause() {
@@ -89,27 +81,37 @@ function gamePause() {
   pause ? mainSong.pause() : mainSong.play();
 }
 
-function gameRestart() {
+function restarting() {
+  restart = true;
   score = 0;
   scoreDisplay.innerHTML = "Score: "+`${score}`;
   combo = 0;
   comboDisplay.innerHTML = "";
   mainSong.currentTime = 0;
   arrowArray = arrowArray.map(arrow => arrow.y = canvas.height);
-  arrowArray = 0;
-  gameStart();
+  arrowArray = [];
 }
 
-// function gameEnd() {
-//   if (arrowArray[arrowArray.length - 1].y === 0) {
-//     setTimeout(playAgain, 2000);
-//   }
-// }
-//
-// function playAgain() {
-//   alert("Please Refresh to Play Again!");
-//   document.location.reload();
-// }
+function gameRestart() {
+  restarting();
+  if (restart === true) {
+    restart = false;
+    gameStart();
+  }
+}
+
+function songEnd() {
+  ended = true;
+  if (ended === true) {
+    let applause = document.getElementById("ending-song");
+    applause.play();
+  }
+}
+
+function gameEnd() {
+  let endModal = document.getElementById("endGameModal");
+  endModal.style.visibility = "visible";
+}
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -239,5 +241,4 @@ const draw = () => {
       arrowArray[i].points = false;
     }
   }
-  // gameEnd();
 };

@@ -16,10 +16,16 @@
     <canvas id="ttrCanvas" width="450" height="630"></canvas>
     <div id="title">Tap Tap Revolution</div>
     <div id="startGameModal">
-      <div id="introMessage">
+      <div id="modalMessage">
         <h3>Tap Tap Revolution!</h3>
         <p>A mostly faithful recreation of the classic DDR game! Use the direction keys to play. You can pause the game using the "P" key, and you can mute/unmute the music by clicking the volume icon.</p>
         <button id="playButton" onClick="gameStart()">Play!</button>
+      </div>
+    </div>
+    <div id="endGameModal">
+      <div id="modalMessage">
+        <h3>Thanks for playing!</h3>
+        <p>Refresh the page to play again.</p>
       </div>
     </div>
     <div id="directions">
@@ -37,7 +43,8 @@
       <img id="up arrow static" src="./assets/staticUp.png">
       <img id="right arrow static" src="./assets/staticRight.png">
     </div>
-    <audio id="player" src="./assets/captainJack.mp3"></audio>
+    <audio id="main-song" src="./assets/captainJack.mp3" OnEnded="songEnd()"></audio>
+    <audio id="ending-song" src="./assets/applause.mp3" OnEnded="gameEnd()"></audio>
     <div>
       <img onClick="toggleMuteButton()" id="mute-button" src="./assets/sound.png">
     </div>
