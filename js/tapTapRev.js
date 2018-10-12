@@ -45,7 +45,6 @@ function arrowCreate() {
 }
 
 function arrowDraw() {
-  console.log(arrowArray.length);
   if (!pause) {
     if (ended || restart) {
       return;
