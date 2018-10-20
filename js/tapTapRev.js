@@ -22,6 +22,7 @@ let nextArrow;
 let score = 0;
 let combo = 0;
 let mainSong = document.getElementById("main-song");
+let endModal = document.getElementById("endGameModal");
 let arrowDrawTimeout;
 
 const drawStaticArrows = window.onload = function() {
@@ -70,7 +71,9 @@ function arrowDraw() {
 
 function gameStart() {
   let startModal = document.getElementById("startGameModal");
-  startModal.style.display = "none";
+  if (startModal.style.dispay !== "none") {
+    startModal.style.display = "none";
+  }
   mainSong.play();
   arrowDraw();
   setInterval(draw, 1);
@@ -114,8 +117,13 @@ function songEnd() {
 }
 
 function gameEnd() {
-  let endModal = document.getElementById("endGameModal");
   endModal.style.visibility = "visible";
+}
+
+function playAgain() {
+  endModal.style.visibility = "hidden";
+  ended = false;
+  gameRestart();
 }
 
 const draw = () => {
