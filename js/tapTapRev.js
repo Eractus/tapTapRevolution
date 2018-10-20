@@ -55,7 +55,15 @@ function arrowDraw() {
       arrowArray.push(nextArrow);
       arrowArray[arrowArray.length-1].drawArrow();
       arrowArray.forEach(arrow => arrow.dy = -4);
-      arrowDrawTimeout = setTimeout(arrowDraw, 600);
+      let time;
+      if (arrowArray.length <= 20) {
+        time = 600
+      } else if (arrowArray.length <= 40 && arrowArray.length > 20){
+        time = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+      } else {
+        time = Math.floor(Math.random() * (600 - 250 + 1)) + 250;
+      }
+      arrowDrawTimeout = setTimeout(arrowDraw, time);
     }
   } else if (pause) {
     if (ended || restart) {
