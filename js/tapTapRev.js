@@ -22,6 +22,7 @@ let nextArrow;
 let score = 0;
 let combo = 0;
 let mainSong = document.getElementById("main-song");
+let arrowDrawTimeout;
 
 const drawStaticArrows = window.onload = function() {
   let leftS = document.getElementById("left arrow static");
@@ -53,7 +54,7 @@ function arrowDraw() {
       arrowArray.push(nextArrow);
       arrowArray[arrowArray.length-1].drawArrow();
       arrowArray.forEach(arrow => arrow.dy = -4);
-      setTimeout(arrowDraw, 600);
+      arrowDrawTimeout = setTimeout(arrowDraw, 600);
     }
   } else if (pause) {
     if (ended || restart) {
@@ -62,7 +63,7 @@ function arrowDraw() {
       for (let i=0; i < arrowArray.length; i++) {
         arrowArray[i].dy = 0;
       }
-      setTimeout(arrowDraw, 100);
+      arrowDrawTimeout = setTimeout(arrowDraw, 100);
     }
   }
 }
@@ -81,13 +82,17 @@ function gamePause() {
 }
 
 function restarting() {
+  clearTimeout(arrowDrawTimeout);
   restart = true;
   score = 0;
   scoreDisplay.innerHTML = "Score: "+`${score}`;
   combo = 0;
   comboDisplay.innerHTML = "";
   mainSong.currentTime = 0;
-  arrowArray = arrowArray.map(arrow => arrow.y = canvas.height);
+  arrowArray = arrowArray.map(arrow => {
+    arrow.y = canvas.height;
+    arrow.dy = 0;
+  });
   arrowArray = [];
 }
 
