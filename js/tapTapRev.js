@@ -84,6 +84,7 @@ function gamePause() {
 function restarting() {
   clearTimeout(arrowDrawTimeout);
   restart = true;
+  pause = false;
   score = 0;
   scoreDisplay.innerHTML = "Score: "+`${score}`;
   combo = 0;
