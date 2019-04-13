@@ -21,18 +21,19 @@ let arrowArray = [];
 let nextArrow;
 let score = 0;
 let combo = 0;
-let mainSong = document.getElementById("main-song");
+let mainSong = document.getElementById("mainSong");
+let startModal = document.getElementById("startGameModal");
 let endModal = document.getElementById("endGameModal");
 let arrowDrawTimeout;
 
 const drawStaticArrows = window.onload = function() {
-  let leftS = document.getElementById("left arrow static");
+  let leftS = document.getElementById("left");
   ctx.drawImage(leftS, leftArrow, yStatic, 75, 75);
-  let downS = document.getElementById("down arrow static");
+  let downS = document.getElementById("down");
   ctx.drawImage(downS, downArrow, yStatic, 75, 75);
-  let upS = document.getElementById("up arrow static");
+  let upS = document.getElementById("up");
   ctx.drawImage(upS, upArrow, yStatic, 75, 75);
-  let rightS = document.getElementById("right arrow static");
+  let rightS = document.getElementById("right");
   ctx.drawImage(rightS, rightArrow, yStatic, 75, 75);
 };
 
@@ -78,7 +79,6 @@ function arrowDraw() {
 }
 
 function gameStart() {
-  let startModal = document.getElementById("startGameModal");
   if (startModal.style.dispay !== "none") {
     startModal.style.display = "none";
   }
@@ -100,6 +100,7 @@ function restarting() {
   scoreDisplay.innerHTML = "Score: "+`${score}`;
   combo = 0;
   comboDisplay.innerHTML = "";
+  mainSong.pause();
   mainSong.currentTime = 0;
   arrowArray = arrowArray.map(arrow => {
     arrow.y = canvas.height;
@@ -112,14 +113,14 @@ function gameRestart() {
   restarting();
   if (restart === true) {
     restart = false;
-    gameStart();
+    startModal.style.display = "flex";
   }
 }
 
 function songEnd() {
   ended = true;
   if (ended === true) {
-    let applause = document.getElementById("ending-song");
+    let applause = document.getElementById("endingSong");
     applause.play();
   }
 }
@@ -131,7 +132,7 @@ function gameEnd() {
 function playAgain() {
   endModal.style.visibility = "hidden";
   ended = false;
-  gameRestart();
+  gameStart();
 }
 
 const draw = () => {

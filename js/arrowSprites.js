@@ -3,7 +3,7 @@ class ArrowSprite {
     this.direction = direction;
     this.width = 75;
     this.height = 75;
-    this.y = 650;
+    this.y = 700;
     this.dy = 0;
     this.points = true;
     this.combo = true;

@@ -42,7 +42,7 @@ function keyUpHandler(e) {
 }
 
 function toggleMuteButton() {
-  let sound = document.getElementById("main-song");
+  let sound = document.getElementById("mainSong");
   if (sound.muted === false) {
     sound.muted = true;
   } else if (sound.muted === true){

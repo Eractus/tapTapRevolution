@@ -7,48 +7,51 @@
     <title>Tap Tap Revolution</title>
   </head>
   <body>
-    <div id="score">Score: 0</div>
-    <div id="links">
-      <a href="https://github.com/Eractus"><img id="github" src="./assets/github.png"></a>
-      <a href="https://www.linkedin.com/in/danny-peng-29515651/"><img id="linkedin" src="./assets/linkedin.png"></a>
-    </div>
-    <div id="combo"></div>
-    <canvas id="ttrCanvas" width="450" height="630"></canvas>
-    <div id="title">Tap Tap Revolution</div>
-    <div id="startGameModal">
-      <div id="modalMessage">
+    <div id="startGameModal" class="modal">
+      <div class="modalMessage">
         <h3>Tap Tap Revolution!</h3>
-        <p>A mostly faithful recreation of the classic DDR game! Use the direction keys to play. You can pause the game using the "P" key, restart the game using the "R" key, and you can mute/unmute the music by clicking the volume icon.</p>
-        <button id="playButton" onClick="gameStart()">Play!</button>
+        <p>A mostly faithful recreation of the classic DDR game!</p>
+        <p>Use the direction keys to play. You can pause the game using the "P" key, restart the game using the "R" key, and you can mute/unmute the music by clicking the volume icon.</p>
+        <button id="play" onClick="gameStart()">Play!</button>
       </div>
     </div>
-    <div id="endGameModal">
-      <div id="modalMessage">
+    <div id="endGameModal" class="modal end">
+      <div class="modalMessage">
         <h3>Thanks for playing!</h3>
-        <button id="playButton" onClick="playAgain()">Play Again</button>
+        <button id="playAgain" onClick="playAgain()">Play Again</button>
       </div>
     </div>
-    <div id="directions">
-      <div>How To Play</div>
-      <ul id="directions-list">
+
+    <div class="title">Tap Tap Revolution</div>
+    <section class="canvasArea">
+      <div class="links">
+        <a href="https://github.com/Eractus"><img src="./assets/github.png"></a>
+        <a href="https://www.linkedin.com/in/danny-peng-29515651/"><img src="./assets/linkedin.png"></a>
+      </div>
+      <img id="muteIcon" onClick="toggleMuteButton()" src="./assets/sound.png">
+      <div id="score">Score: 0</div>
+      <div id="combo"></div>
+      <canvas id="ttrCanvas" width="450" height="680"></canvas>
+    </section>
+    <div class="directions">
+      <h4>How To Play</h4>
+      <ul>
         <li>Play using the direction keys</li>
         <li>Try to register the moving arrow sprites as they overlap the static arrows.</li>
         <li>A counter keeps track of your current combo/streak.</li>
         <li>The higher the combo, the more points you earn!</li>
       </ul>
     </div>
-    <div id="duplicates">
-      <img id="left arrow static" src="./assets/staticLeft.png">
-      <img id="down arrow static" src="./assets/staticDown.png">
-      <img id="up arrow static" src="./assets/staticUp.png">
-      <img id="right arrow static" src="./assets/staticRight.png">
+    <div class="arrowImages">
+      <img id="left" src="./assets/staticLeft.png">
+      <img id="down" src="./assets/staticDown.png">
+      <img id="up" src="./assets/staticUp.png">
+      <img id="right" src="./assets/staticRight.png">
     </div>
-    <audio id="main-song" src="./assets/captainJack.mp3" OnEnded="songEnd()"></audio>
-    <audio id="ending-song" src="./assets/applause.mp3" OnEnded="gameEnd()"></audio>
-    <div>
-      <img onClick="toggleMuteButton()" id="mute-button" src="./assets/sound.png">
-    </div>
+    <audio id="mainSong" src="./assets/captainJack.mp3" OnEnded="songEnd()"></audio>
+    <audio id="endingSong" src="./assets/applause.mp3" OnEnded="gameEnd()"></audio>
   </body>
+
   <script src="./js/gameControls.js" type="text/javascript"></script>
   <script src="./js/arrowSprites.js" type="text/javascript"></script>
   <script src="./js/tapTapRev.js" type="text/javascript"></script>
