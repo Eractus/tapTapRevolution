@@ -12,27 +12,24 @@ class ArrowSprite {
   }
 
   arrowParams(direction) {
+    this.directionImage = new Image();
     switch (direction) {
       case "left":
-        this.directionImage = new Image();
         this.directionImage.src = "assets/leftArrowDynamic.png";
         this.shift = 0;
         this.x = 84.375;
         break;
       case "down":
-        this.directionImage = new Image();
         this.directionImage.src = "assets/downArrowDynamic.png";
         this.shift = 300;
         this.x = 154.6875;
         break;
       case "up":
-        this.directionImage = new Image();
         this.directionImage.src = "assets/upArrowDynamic.png";
         this.shift = 600;
         this.x = 225;
         break;
       case "right":
-        this.directionImage = new Image();
         this.directionImage.src = "assets/rightArrowDynamic.png";
         this.shift = 900;
         this.x = 295.3125;
