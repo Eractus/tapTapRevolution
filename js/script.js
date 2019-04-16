@@ -1,76 +1,105 @@
 const canvas = document.getElementById("ttrCanvas");
 const ctx = canvas.getContext("2d");
-
+let mainSong = document.getElementById("mainSong");
+let applause = document.getElementById("endApplause");
+let startModal = document.getElementById("startGameModal");
+let endModal = document.getElementById("endGameModal");
 let scoreDisplay = document.getElementById("score");
 let comboDisplay = document.getElementById("combo");
-
+let score = 0;
+let combo = 0;
+let y = canvas.height;
 let pause = false;
 let restart = false;
 let ended = false;
-let leftArrow = 1.5*(canvas.width/8);
-let downArrow = 2.75*(canvas.width/8);
-let upArrow = 4.0*(canvas.width/8);
-let rightArrow = 5.25*(canvas.width/8);
-let yStatic = 40;
-let y = canvas.height;
 let leftPressed = false;
 let downPressed = false;
 let upPressed = false;
 let rightPressed = false;
 let arrowArray = [];
-let nextArrow;
-let score = 0;
-let combo = 0;
-let mainSong = document.getElementById("mainSong");
-let startModal = document.getElementById("startGameModal");
-let endModal = document.getElementById("endGameModal");
 let arrowDrawTimeout;
 
-const drawStaticArrows = window.onload = function() {
-  let leftS = document.getElementById("left");
-  ctx.drawImage(leftS, leftArrow, yStatic, 75, 75);
-  let downS = document.getElementById("down");
-  ctx.drawImage(downS, downArrow, yStatic, 75, 75);
-  let upS = document.getElementById("up");
-  ctx.drawImage(upS, upArrow, yStatic, 75, 75);
-  let rightS = document.getElementById("right");
-  ctx.drawImage(rightS, rightArrow, yStatic, 75, 75);
-};
+window.onload = drawStaticArrows;
+document.getElementById("playButton").onclick = gameStart;
+document.getElementById("playAgainButton").onclick = playAgain;
+document.getElementById("muteIcon").onclick = toggleMute;
+document.getElementById("mainSong").onended = songEnd;
+document.getElementById("endApplause").onended = gameEnd;
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function drawStaticArrows() {
+  let leftImg = document.getElementById("left");
+  let leftSX = 1.5 * (canvas.width / 8);
+  let downImg = document.getElementById("down");
+  let downSX = 2.75 * (canvas.width / 8);
+  let upImg = document.getElementById("up");
+  let upSX = 4.0 * (canvas.width / 8);
+  let rightImg = document.getElementById("right");
+  let rightSX = 5.25 * (canvas.width / 8);
+
+  let img;
+  let sx;
+  let sy = 40;
+  let width = 75;
+  let height = 75;
+  ["left", "down", "up", "right"].forEach(dir => {
+    switch (dir) {
+      case "left":
+        img = leftImg;
+        sx = leftSX;
+        break;
+      case "down":
+        img = downImg;
+        sx = downSX;
+        break;
+      case "up":
+        img = upImg;
+        sx = upSX;
+        break;
+      case "right":
+        img = rightImg;
+        sx = rightSX;
+        break;
+    }
+    ctx.drawImage(img, sx, sy, width, height);
+  });
+}
 
 function arrowCreate() {
   let num = Math.floor(Math.random() * 4) + 1;
   switch (num) {
-    case 1: return new ArrowSprite("left");
-    case 2: return new ArrowSprite("down");
-    case 3: return new ArrowSprite("up");
-    case 4: return new ArrowSprite("right");
+    case 1:
+      return new ArrowSprite("left");
+    case 2:
+      return new ArrowSprite("down");
+    case 3:
+      return new ArrowSprite("up");
+    case 4:
+      return new ArrowSprite("right");
   }
 }
 
 function arrowDraw() {
-  if (!pause) {
-    if (ended || restart) {
-      return;
-    } else {
-      nextArrow = arrowCreate();
+  if (ended || restart) {
+    return;
+  } else {
+    if (!pause) {
+      let nextArrow = arrowCreate();
       arrowArray.push(nextArrow);
-      arrowArray[arrowArray.length-1].drawArrow();
-      arrowArray.forEach(arrow => arrow.dy = -4);
+      arrowArray[arrowArray.length - 1].drawArrow();
+      arrowArray.forEach(arrow => (arrow.dy = -4));
       let time;
       if (arrowArray.length <= 20) {
-        time = 600
-      } else if (arrowArray.length <= 40 && arrowArray.length > 20){
+        time = 600;
+      } else if (arrowArray.length <= 40 && arrowArray.length > 20) {
         time = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
       } else {
         time = Math.floor(Math.random() * (600 - 250 + 1)) + 250;
       }
       arrowDrawTimeout = setTimeout(arrowDraw, time);
-    }
-  } else if (pause) {
-    if (ended || restart) {
-      return;
     } else {
-      for (let i=0; i < arrowArray.length; i++) {
+      for (let i = 0; i < arrowArray.length; i++) {
         arrowArray[i].dy = 0;
       }
       arrowDrawTimeout = setTimeout(arrowDraw, 100);
@@ -97,7 +126,7 @@ function restarting() {
   restart = true;
   pause = false;
   score = 0;
-  scoreDisplay.innerHTML = "Score: "+`${score}`;
+  scoreDisplay.innerHTML = "Score: " + `${score}`;
   combo = 0;
   comboDisplay.innerHTML = "";
   mainSong.pause();
@@ -120,7 +149,6 @@ function gameRestart() {
 function songEnd() {
   ended = true;
   if (ended === true) {
-    let applause = document.getElementById("endingSong");
     applause.play();
   }
 }
@@ -135,14 +163,62 @@ function playAgain() {
   gameStart();
 }
 
+function keyDownHandler(e) {
+  switch (e.keyCode) {
+    case 37:
+      leftPressed = true;
+      break;
+    case 38:
+      upPressed = true;
+      break;
+    case 39:
+      rightPressed = true;
+      break;
+    case 40:
+      downPressed = true;
+      break;
+    case 80:
+      gamePause();
+      break;
+    case 82:
+      gameRestart();
+      break;
+  }
+}
+
+function keyUpHandler(e) {
+  switch (e.keyCode) {
+    case 37:
+      leftPressed = false;
+      break;
+    case 38:
+      upPressed = false;
+      break;
+    case 39:
+      rightPressed = false;
+      break;
+    case 40:
+      downPressed = false;
+      break;
+  }
+}
+
+function toggleMute() {
+  mainSong.muted = !mainSong.muted;
+}
+
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   drawStaticArrows();
 
-  for (let i=0; i<arrowArray.length; i++) {
+  for (let i = 0; i < arrowArray.length; i++) {
     if (leftPressed) {
-      if (arrowArray[i].x === 84.375 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+      if (
+        arrowArray[i].x === 84.375 &&
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1
+      ) {
         if (arrowArray[i].combo === true) {
           combo += 1;
           arrowArray[i].combo = false;
@@ -158,20 +234,28 @@ const draw = () => {
         } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
           score += 100;
           arrowArray[i].points = false;
-        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+        } else if (
+          arrowArray[i].points === true &&
+          combo > 50 &&
+          combo <= 100
+        ) {
           score += 150;
           arrowArray[i].points = false;
         } else if (arrowArray[i].points === true && combo > 100) {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = "Score: "+`${score}`;
+        scoreDisplay.innerHTML = "Score: " + `${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
 
     if (downPressed) {
-      if (arrowArray[i].x === 154.6875 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+      if (
+        arrowArray[i].x === 154.6875 &&
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1
+      ) {
         if (arrowArray[i].combo === true) {
           combo += 1;
           arrowArray[i].combo = false;
@@ -187,20 +271,28 @@ const draw = () => {
         } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
           score += 100;
           arrowArray[i].points = false;
-        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+        } else if (
+          arrowArray[i].points === true &&
+          combo > 50 &&
+          combo <= 100
+        ) {
           score += 150;
           arrowArray[i].points = false;
         } else if (arrowArray[i].points === true && combo > 100) {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = "Score: "+`${score}`
+        scoreDisplay.innerHTML = "Score: " + `${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
 
     if (upPressed) {
-      if (arrowArray[i].x === 225 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+      if (
+        arrowArray[i].x === 225 &&
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1
+      ) {
         if (arrowArray[i].combo === true) {
           combo += 1;
           arrowArray[i].combo = false;
@@ -216,20 +308,28 @@ const draw = () => {
         } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
           score += 100;
           arrowArray[i].points = false;
-        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+        } else if (
+          arrowArray[i].points === true &&
+          combo > 50 &&
+          combo <= 100
+        ) {
           score += 150;
           arrowArray[i].points = false;
         } else if (arrowArray[i].points === true && combo > 100) {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = "Score: "+`${score}`
+        scoreDisplay.innerHTML = "Score: " + `${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
 
     if (rightPressed) {
-      if (arrowArray[i].x === 295.3125 && arrowArray[i].y < 28 && arrowArray[i].y > 1) {
+      if (
+        arrowArray[i].x === 295.3125 &&
+        arrowArray[i].y < 28 &&
+        arrowArray[i].y > 1
+      ) {
         if (arrowArray[i].combo === true) {
           combo += 1;
           arrowArray[i].combo = false;
@@ -245,14 +345,18 @@ const draw = () => {
         } else if (arrowArray[i].points === true && combo > 25 && combo <= 50) {
           score += 100;
           arrowArray[i].points = false;
-        } else if (arrowArray[i].points === true && combo > 50 && combo <= 100) {
+        } else if (
+          arrowArray[i].points === true &&
+          combo > 50 &&
+          combo <= 100
+        ) {
           score += 150;
           arrowArray[i].points = false;
         } else if (arrowArray[i].points === true && combo > 100) {
           score += 200;
           arrowArray[i].points = false;
         }
-        scoreDisplay.innerHTML = "Score: "+`${score}`;
+        scoreDisplay.innerHTML = "Score: " + `${score}`;
         arrowArray[i].directionImage.src = "";
       }
     }
