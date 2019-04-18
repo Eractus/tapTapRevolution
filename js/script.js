@@ -6,9 +6,9 @@ let startModal = document.getElementById("startGameModal");
 let endModal = document.getElementById("endGameModal");
 let scoreDisplay = document.getElementById("score");
 let comboDisplay = document.getElementById("combo");
+let pauseIcon = document.getElementById("pauseIcon");
 let score = 0;
 let combo = 0;
-let y = canvas.height;
 let pause = false;
 let restart = false;
 let ended = false;
@@ -23,10 +23,12 @@ window.onload = drawStaticArrows;
 document.getElementById("playButton").onclick = gameStart;
 document.getElementById("playAgainButton").onclick = playAgain;
 document.getElementById("muteIcon").onclick = toggleMute;
+pauseIcon.onclick = gamePause;
+document.getElementById("restartIcon").onclick = gameRestart;
 document.getElementById("mainSong").onended = songEnd;
 document.getElementById("endApplause").onended = gameEnd;
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("keydown", handleKeyPress);
+document.addEventListener("keyup", handleKeyPress);
 
 function drawStaticArrows() {
   let leftImg = document.getElementById("left");
@@ -60,24 +62,18 @@ function drawStaticArrows() {
       case "right":
         img = rightImg;
         sx = rightSX;
-        break;
     }
     ctx.drawImage(img, sx, sy, width, height);
   });
 }
 
-function arrowCreate() {
-  let num = Math.floor(Math.random() * 4) + 1;
-  switch (num) {
-    case 1:
-      return new ArrowSprite("left");
-    case 2:
-      return new ArrowSprite("down");
-    case 3:
-      return new ArrowSprite("up");
-    case 4:
-      return new ArrowSprite("right");
+function gameStart() {
+  if (startModal.style.dispay !== "none") {
+    startModal.style.display = "none";
   }
+  mainSong.play();
+  arrowDraw();
+  setInterval(draw, 1);
 }
 
 function arrowDraw() {
@@ -107,18 +103,37 @@ function arrowDraw() {
   }
 }
 
-function gameStart() {
-  if (startModal.style.dispay !== "none") {
-    startModal.style.display = "none";
+function arrowCreate() {
+  let num = Math.floor(Math.random() * 4) + 1;
+  switch (num) {
+    case 1:
+      return new ArrowSprite("left");
+    case 2:
+      return new ArrowSprite("down");
+    case 3:
+      return new ArrowSprite("up");
+    case 4:
+      return new ArrowSprite("right");
   }
-  mainSong.play();
-  arrowDraw();
-  setInterval(draw, 1);
 }
 
 function gamePause() {
   pause = !pause;
-  pause ? mainSong.pause() : mainSong.play();
+  if (pause) {
+    mainSong.pause();
+    pauseIcon.src = "./assets/play.png";
+  } else {
+    mainSong.play();
+    pauseIcon.src = "./assets/pause.png";
+  }
+}
+
+function gameRestart() {
+  restarting();
+  if (restart === true) {
+    restart = false;
+    startModal.style.display = "flex";
+  }
 }
 
 function restarting() {
@@ -138,14 +153,6 @@ function restarting() {
   arrowArray = [];
 }
 
-function gameRestart() {
-  restarting();
-  if (restart === true) {
-    restart = false;
-    startModal.style.display = "flex";
-  }
-}
-
 function songEnd() {
   ended = true;
   if (ended === true) {
@@ -163,51 +170,28 @@ function playAgain() {
   gameStart();
 }
 
-function keyDownHandler(e) {
-  switch (e.keyCode) {
-    case 37:
-      leftPressed = true;
-      break;
-    case 38:
-      upPressed = true;
-      break;
-    case 39:
-      rightPressed = true;
-      break;
-    case 40:
-      downPressed = true;
-      break;
-    case 80:
-      gamePause();
-      break;
-    case 82:
-      gameRestart();
-      break;
-  }
-}
-
-function keyUpHandler(e) {
-  switch (e.keyCode) {
-    case 37:
-      leftPressed = false;
-      break;
-    case 38:
-      upPressed = false;
-      break;
-    case 39:
-      rightPressed = false;
-      break;
-    case 40:
-      downPressed = false;
-      break;
-  }
-}
-
 function toggleMute() {
   mainSong.muted = !mainSong.muted;
 }
 
-const draw = () => {
+function handleKeyPress(e) {
+  switch (e.keyCode) {
+    case 37:
+      leftPressed = !leftPressed;
+      break;
+    case 38:
+      upPressed = !upPressed;
+      break;
+    case 39:
+      rightPressed = !rightPressed;
+      break;
+    case 40:
+      downPressed = !downPressed;
+      break;
+  }
+}
+
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   drawStaticArrows();
@@ -367,4 +351,4 @@ const draw = () => {
       arrowArray[i].points = false;
     }
   }
-};
+}

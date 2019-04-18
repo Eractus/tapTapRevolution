@@ -12,7 +12,7 @@
       <div class="modalMessage">
         <h3>Tap Tap Revolution!</h3>
         <p>A mostly faithful recreation of the classic DDR game!</p>
-        <p>Use the direction keys to play. You can pause the game using the "P" key, restart the game using the "R" key, and you can mute/unmute the music by clicking the volume icon.</p>
+        <p>Use the direction keys to play. You can also pause/resume, restart, and mute/unmute the music by clicking the icons to the right of the canvas.</p>
         <button id="playButton">Play!</button>
       </div>
     </div>
@@ -29,7 +29,11 @@
         <a href="https://github.com/Eractus"><img src="./assets/github.png"></a>
         <a href="https://www.linkedin.com/in/danny-peng-29515651/"><img src="./assets/linkedin.png"></a>
       </div>
-      <img id="muteIcon" src="./assets/sound.png">
+      <div class="controls">
+        <img id="muteIcon" src="./assets/sound.png">
+        <img id="pauseIcon" src="./assets/pause.png">
+        <img id="restartIcon" src="./assets/restart.png">
+      </div>
       <div id="score">Score: 0</div>
       <div id="combo"></div>
       <canvas id="ttrCanvas" width="450" height="680"></canvas>

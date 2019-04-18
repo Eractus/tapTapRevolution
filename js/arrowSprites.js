@@ -40,7 +40,7 @@ class ArrowSprite {
   drawArrow() {
     let numFrames = 0;
     const animate = () => {
-      numFrames ++;
+      numFrames++;
       ctx.drawImage(
         this.directionImage,
         this.shift,
