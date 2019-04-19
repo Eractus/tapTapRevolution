@@ -29,6 +29,7 @@ h4 {
 }
 
 section {
+  position: relative;
   width: 45vw;
   display: flex;
   flex-direction: column;
@@ -55,6 +56,20 @@ button:active {
   background-color: var(--dark-gray);
 }
 
+#modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+}
+
 #score {
   color: var(--yellow);
   font-size: 28px;
@@ -71,28 +86,16 @@ button:active {
   padding: 0 10px;
 }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 5;
-  background-color: var(--black);
-  background-color: rgba(0, 0, 0, 0.9);
+#startGameModal {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.end {
-  visibility: hidden;
+#endGameModal {
+  display: none;
 }
 
 .modalMessage {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   color: var(--white);
@@ -146,12 +149,46 @@ button:active {
   display: none;
 }
 
-.canvasArea {
-  position: relative;
+#directions {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  position: fixed;
+  top: calc(50vh - 175px);
+  left: calc(50vw - 150px);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  border: 3px solid var(--white);
+  border-radius: 3px;
+  padding: 10px;
 }
 
-.directions {
-  display: none;
+#directions h4 {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  border-bottom: 3px solid var(--white);
+}
+
+#directions ul {
+  padding-inline-start: 0;
+  flex-wrap: wrap;
+  display: flex;
+  color: var(--white);
+  list-style-type: none;
+}
+
+#directions li {
+  font-size: 15px;
+  padding: 10px;
+}
+
+#directions li::before {
+  content: "\25B7";
+  color: var(--neon-yellow);
+  margin-right: 10px;
 }
 
 .arrowImages {
@@ -192,44 +229,11 @@ button:active {
     align-items: center;
   }
 
-  .directions {
+  #directions {
+    display: flex;
     width: 20vw;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: var(--white);
-    border: 3px solid var(--white);
-    border-radius: 3px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin-left: 3%;
-  }
-
-  .directions h4 {
-    font-size: 18px;
-    font-weight: 300;
-    text-align: center;
-    border-bottom: 3px solid var(--white);
-  }
-
-  .directions ul {
-    padding-inline-start: 0;
-    flex-wrap: wrap;
-    display: flex;
-    color: var(--white);
-    list-style-type: none;
-  }
-
-  .directions li {
-    font-size: 15px;
-    padding: 10px;
-  }
-
-  .directions li::before {
-    content: "\25B7";
-    color: var(--neon-yellow);
-    margin-right: 10px;
+    position: static;
   }
 }
 
@@ -247,15 +251,15 @@ button:active {
     font-size: 30px;
   }
 
-  .directions {
+  #directions {
     width: 30vw;
   }
 
-  .directions h4 {
+  #directions h4 {
     font-size: 24px;
   }
 
-  .directions li {
+  #directions li {
     font-size: 18px;
   }
 }
@@ -285,7 +289,7 @@ button:active {
     font-size: 45px;
   }
 
-  .directions h4 {
+  #directions h4 {
     font-size: 28px;
   }
 

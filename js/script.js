@@ -1,5 +1,8 @@
 const canvas = document.getElementById("ttrCanvas");
 const ctx = canvas.getContext("2d");
+let modalOverlay = document.getElementById("modalOverlay");
+let directions = document.getElementById("directions");
+let playButton = document.getElementById("playButton");
 let mainSong = document.getElementById("mainSong");
 let applause = document.getElementById("endApplause");
 let startModal = document.getElementById("startGameModal");
@@ -16,11 +19,13 @@ let leftPressed = false;
 let downPressed = false;
 let upPressed = false;
 let rightPressed = false;
+let dirSty = window.getComputedStyle(directions).getPropertyValue('display');
 let arrowArray = [];
 let arrowDrawTimeout;
 
 window.onload = drawStaticArrows;
-document.getElementById("playButton").onclick = gameStart;
+document.getElementById("redirectButton").onclick = popupDirections;
+playButton.onclick = gameStart;
 document.getElementById("playAgainButton").onclick = playAgain;
 document.getElementById("muteIcon").onclick = toggleMute;
 pauseIcon.onclick = gamePause;
@@ -67,9 +72,20 @@ function drawStaticArrows() {
   });
 }
 
+function popupDirections() {
+  startModal.style.display = "none";
+  directions.style.zIndex = 10;
+  if (dirSty === "none") {
+    directions.style.display = "flex";
+  }
+}
+
 function gameStart() {
-  if (startModal.style.dispay !== "none") {
-    startModal.style.display = "none";
+  modalOverlay.style.visibility = "hidden";
+  playButton.style.display = "none";
+  directions.style.zIndex = 0;
+  if (dirSty === "none") {
+    directions.style.display = "none";
   }
   mainSong.play();
   arrowDraw();
@@ -132,7 +148,9 @@ function gameRestart() {
   restarting();
   if (restart === true) {
     restart = false;
+    playButton.style.display = "flex";
     startModal.style.display = "flex";
+    modalOverlay.style.visibility = "visible";
   }
 }
 
@@ -161,7 +179,8 @@ function songEnd() {
 }
 
 function gameEnd() {
-  endModal.style.visibility = "visible";
+  modalOverlay.style.visibility = "hidden";
+  endModal.style.display = "flex";
 }
 
 function playAgain() {
