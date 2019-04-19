@@ -8,7 +8,8 @@ let applause = document.getElementById("endApplause");
 let startModal = document.getElementById("startGameModal");
 let endModal = document.getElementById("endGameModal");
 let scoreDisplay = document.getElementById("score");
-let comboDisplay = document.getElementById("combo");
+let comboCount = document.getElementById("comboCount");
+let comboText = document.getElementById("comboText");
 let pauseIcon = document.getElementById("pauseIcon");
 let score = 0;
 let combo = 0;
@@ -19,7 +20,7 @@ let leftPressed = false;
 let downPressed = false;
 let upPressed = false;
 let rightPressed = false;
-let dirSty = window.getComputedStyle(directions).getPropertyValue('display');
+let dirSty = window.getComputedStyle(directions).getPropertyValue("display");
 let arrowArray = [];
 let arrowDrawTimeout;
 
@@ -158,10 +159,7 @@ function restarting() {
   clearTimeout(arrowDrawTimeout);
   restart = true;
   pause = false;
-  score = 0;
-  scoreDisplay.innerHTML = "Score: " + `${score}`;
-  combo = 0;
-  comboDisplay.innerHTML = "";
+  clearNumbers();
   mainSong.pause();
   mainSong.currentTime = 0;
   arrowArray = arrowArray.map(arrow => {
@@ -169,6 +167,13 @@ function restarting() {
     arrow.dy = 0;
   });
   arrowArray = [];
+}
+
+function clearNumbers() {
+  score = 0;
+  scoreDisplay.innerHTML = "Score: " + `${score}`;
+  combo = 0;
+  comboCount.innerHTML = "";
 }
 
 function songEnd() {
@@ -179,12 +184,14 @@ function songEnd() {
 }
 
 function gameEnd() {
-  modalOverlay.style.visibility = "hidden";
+  modalOverlay.style.visibility = "visible";
   endModal.style.display = "flex";
 }
 
 function playAgain() {
-  endModal.style.visibility = "hidden";
+  modalOverlay.style.visibility = "hidden";
+  endModal.style.display = "none";
+  clearNumbers();
   ended = false;
   gameStart();
 }
@@ -216,6 +223,12 @@ function draw() {
   drawStaticArrows();
 
   for (let i = 0; i < arrowArray.length; i++) {
+    if (combo > 0) {
+      comboText.style.visibility = "visible";
+    } else {
+      comboText.style.visibility = "hidden";
+    }
+
     if (leftPressed) {
       if (
         arrowArray[i].x === 84.375 &&
@@ -226,7 +239,7 @@ function draw() {
           combo += 1;
           arrowArray[i].combo = false;
         }
-        comboDisplay.innerHTML = combo;
+        comboCount.innerHTML = combo;
 
         if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
@@ -263,7 +276,7 @@ function draw() {
           combo += 1;
           arrowArray[i].combo = false;
         }
-        comboDisplay.innerHTML = combo;
+        comboCount.innerHTML = combo;
 
         if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
@@ -300,7 +313,7 @@ function draw() {
           combo += 1;
           arrowArray[i].combo = false;
         }
-        comboDisplay.innerHTML = combo;
+        comboCount.innerHTML = combo;
 
         if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
@@ -337,7 +350,7 @@ function draw() {
           combo += 1;
           arrowArray[i].combo = false;
         }
-        comboDisplay.innerHTML = combo;
+        comboCount.innerHTML = combo;
 
         if (arrowArray[i].points === true && combo <= 10) {
           score += 50;
@@ -366,7 +379,7 @@ function draw() {
 
     if (arrowArray[i].y <= 1 && arrowArray[i].points !== false) {
       combo = 0;
-      comboDisplay.innerHTML = "";
+      comboCount.innerHTML = "";
       arrowArray[i].points = false;
     }
   }

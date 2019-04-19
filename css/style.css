@@ -75,17 +75,6 @@ button:active {
   font-size: 28px;
 }
 
-#combo {
-  font-family: var(--font-family);
-  font-size: 35px;
-  position: absolute;
-  left: -110px;
-  top: 200px;
-  color: var(--pink);
-  border-radius: 3px;
-  padding: 0 10px;
-}
-
 #startGameModal {
   display: flex;
 }
@@ -143,6 +132,30 @@ button:active {
   height: 25px;
   margin: 5px 0;
   border: 1px solid var(--white);
+  cursor: pointer;
+}
+
+.combo {
+  font-family: var(--font-family);
+  font-size: 35px;
+  position: absolute;
+  left: -110px;
+  top: 200px;
+  color: var(--pink);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.combo p {
+  margin: 0;
+}
+
+.combo span {
+  font-size: 20px;
+  margin-left: 5px;
+  color: var(--yellow);
+  visibility: hidden;
 }
 
 .title {
@@ -196,9 +209,13 @@ button:active {
 }
 
 @media only screen and (min-width: 600px) {
-  #combo {
+  .combo {
     font-size: 45px;
     left: -75px;
+  }
+
+  .combo span {
+    font-size: 25px;
   }
 
   .controls {
@@ -265,8 +282,12 @@ button:active {
 }
 
 @media only screen and (min-width: 992px) {
-  #combo {
+  .combo {
     font-size: 55px;
+  }
+
+  .combo span {
+    font-size: 30px;
   }
 
   .controls {
